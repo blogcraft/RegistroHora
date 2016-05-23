@@ -1,0 +1,108 @@
+@model RegistroHora.Models.Proyecto
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Proyecto</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Nombre" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ClienteId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ClienteId" asp-items="ViewBag.ClienteId" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TipoProyectoId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <div class="input-group">
+                    <select asp-for="TipoProyectoId" asp-items="ViewBag.TipoProyectoId" class="form-control"></select>
+                    <span class="input-group-btn">
+                        <a class="btn btn-default" asp-controller="TipoProyecto" asp-action="Create">Crear Nuevo</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FechaInicio" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FechaInicio" class="form-control" />
+                <span asp-validation-for="FechaInicio" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PorcAvance" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PorcAvance" class="form-control" />
+                <span asp-validation-for="PorcAvance" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="Concluido" />
+                    <label asp-for="Concluido"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Estado" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Estado" class="form-control" />
+                <span asp-validation-for="Estado" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FechaCertificacion" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FechaCertificacion" class="form-control" />
+                <span asp-validation-for="FechaCertificacion" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FechaCompromiso" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FechaCompromiso" class="form-control" />
+                <span asp-validation-for="FechaCompromiso" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Volver al listado</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/globalize/lib/globalize.js"></script>
+    <script src="~/lib/jquery-validation-globalize/jquery.validate.globalize.js"></script>
+    <script>
+        $("#FechaInicio").datetimepicker({
+            locale: window.navigator.language
+            , format: 'L'
+        });
+        $("#FechaCertificacion").datetimepicker({
+            locale: window.navigator.language
+            , format: 'L'
+        });
+        $("#FechaCompromiso").datetimepicker({
+            locale: window.navigator.language
+            , format: 'L'
+        });
+    </script>
+}

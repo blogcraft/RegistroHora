@@ -1,0 +1,80 @@
+@model IEnumerable<RegistroHora.Models.Registro>
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<div class="form-inline">
+    @using (Html.BeginForm())
+    {
+        <div class="form-group" style="position: relative;">
+            <label for="FechaInicio">Fecha desde</label>
+            @Html.TextBox("FechaInicio", null, new { @class = "form-control" })
+        </div>
+        <div class="form-group" style="position: relative;">
+            <label for="FechaFin">Fecha hasta</label>
+            @Html.TextBox("FechaFin", null, new { @class = "form-control" })
+        </div>
+        <input class="btn btn-default" type="submit" value="Filtrar" />
+    }
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Horas)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var group in Model.GroupBy(x => x.Proyecto))
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => group.Key.Nombre)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var item in group)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Horas)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalle</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <th></th>
+            <th>
+                @group.Sum(x => x.Horas)
+            </th>
+            <th></th>
+        </tr>
+    }
+</table>
+
+@section Scripts {
+    <script>
+        $("#FechaInicio").datetimepicker({
+            locale: window.navigator.language
+            , format: 'L'
+        });
+        $("#FechaFin").datetimepicker({
+            locale: window.navigator.language
+            , format: 'L'
+        });
+    </script>
+}

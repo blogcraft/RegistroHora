@@ -1,0 +1,64 @@
+@model RegistroHora.Models.Registro
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Registro</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Fecha" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Horas" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Horas" class="form-control" />
+                <span asp-validation-for="Horas" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProyectoId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ProyectoId" asp-items="ViewBag.ProyectoId" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Usuario" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Usuario" class="form-control" readonly />
+            </div>
+        </div>
+        <input type="hidden" asp-for="UsuarioId" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/globalize/lib/globalize.js"></script>
+    <script src="~/lib/jquery-validation-globalize/jquery.validate.globalize.js"></script>
+    <script>
+        $("#Fecha").datetimepicker({
+            locale: window.navigator.language
+                , format: 'L'
+        });
+    </script>
+}
